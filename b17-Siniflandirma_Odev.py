@@ -5,7 +5,15 @@ Created on Thu Mar 15 04:18:20 2018
 
 @author: regkr
 """
-
+"""
+Iris veri kümesi ünlü ve bilinmesi gerekn bir veri kümesidir.
+Bu veri kümesi üzerindeki problemleri en iyi şekilde nasıl
+çözeceğimizi öğrenmemiz gerekir. 
+Ben veriyi excel dosyasından yükledim ama bu veri
+sci-kit learn kütüphanesi içinde hazır bulunuyor.
+Iris ve başka veri kümeleri için sklearn sitesinden
+aratabilirsiniz.
+"""
 #1. kutuphaneler
 import numpy as np
 import matplotlib.pyplot as plt
