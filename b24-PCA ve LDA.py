@@ -3,7 +3,7 @@
 """
 Created on Sun Jul  8 10:03:40 2018
 
-@author: sadievrenseker
+@author: regkr
 """
 """
 PCA bir bir boyut indirgeme yöntemidir. Bütün makine öğrenmesi kütüphanelerinin
