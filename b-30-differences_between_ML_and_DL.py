@@ -37,6 +37,7 @@ from keras.utils import to_categorical
 y = to_categorical(y, num_classes=3)
 y_test2 = to_categorical(y_test, num_classes=3)
 
+#PREDİCTİON WİTH KERAS
 from keras.layers import Dense
 from keras.models import Sequential
 
@@ -54,6 +55,7 @@ y_pred3 = model.predict(X_test2) #keras prediction
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import r2_score
 
+#BOYUT İNDİRGEME İŞLEMİNİN BAŞARISI:(LDA)
 print ("\nOriginal Prediction Matrix:") 
 cm1 = confusion_matrix(y_test, y_pred)
 print (cm1)
@@ -69,9 +71,3 @@ r2_2 = r2_score(y_test,y_pred2)
 print("LDA Applied R2 score:", r2_2)
 r2_3 = r2_score(y_test2,y_pred3)
 print ("Keras R2 score:",r2_3)
-
-
-
-
-
-
