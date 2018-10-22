@@ -24,7 +24,7 @@ X=lda.fit_transform(x,y)
 from sklearn.linear_model import LogisticRegression
 lr = LogisticRegression()
 lr.fit(X_train,y_train)
-#PCA uygulanmamış veri
+#LDA uygulanmamış veri
 lr2 = LogisticRegression()
 lr2.fit(X_train2,y_train)
 
@@ -54,13 +54,15 @@ y_pred3 = model.predict(X_test2) #keras prediction
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import r2_score
 
-print ("\nOriginal Prediction Matrix:")
+print ("\nOriginal Prediction Matrix:") 
 cm1 = confusion_matrix(y_test, y_pred)
 print (cm1)
 print ("\nLDA Applied Prediction:")
 cm2 = confusion_matrix(y_test, y_pred2)
 print (cm2)
 cm1 = confusion_matrix(y_test, y_pred)
+
+#MODELLERİN R KARE DEĞERLERİNE GÖRE BAŞARISI: 
 r2_1 = r2_score(y_test,y_pred)
 print("\nOrjinal R2 score:", r2_1)
 r2_2 = r2_score(y_test,y_pred2)
