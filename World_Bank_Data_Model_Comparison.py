@@ -51,7 +51,7 @@ model.add(Dense(30, activation="relu"))
 model.add(Dense(1))
 
 model.compile(batch_size=1, optimizer=Adam(lr=0.001), loss="mse")
-
+#daha iyi sonuçlar için optimizer ve loss fonksiyonu değiştirilmeli ve optmize edilmelidir!
 model.fit(x_train, y_train, epochs=15000)
 y_pred_ker = model.predict([[32]])
 y_pred_k = model.predict(x)
