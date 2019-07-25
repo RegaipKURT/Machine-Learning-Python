@@ -10,7 +10,7 @@ from keras.layers import Dense
 from keras.models import Sequential
 from keras.optimizers import Adam
 
-veri = pd.read_csv("datas/WB.csv")
+veri = pd.read_csv("WB.csv") #veri repository içinden indirilmeli!
 print(veri.head())
 
 x = veri["Date"].values.reshape(-1,1)
