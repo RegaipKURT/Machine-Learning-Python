@@ -11,7 +11,7 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 from keras.optimizers import SGD
 
-veri = pd.read_csv("datas/WB.csv")
+veri = pd.read_csv("datas/WB.csv") #WB.csv dosyası repository içinde var, indirip kullanılabilir.
 print(veri.head())
 
 x = veri["Date"].values.reshape(-1,1)
