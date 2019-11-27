@@ -152,8 +152,8 @@ def log_reg(x_train, y_train, x_test, y_test, learning_rate ,  num_iterations):
 #şimdi kendi verimiz üzerinden bir deneme yapalım.
 # let's test our codes 
 """
-buradan sonra artık arda mavinin veri setinden sklearn ile işaret dili verisini alarak
-kendi modelimize koyarak sonuçları görmek üzerine. 
+buradan sonra artık sklearn ile işaret dili verisini alarak
+kendi modelimize koyup sonuçları görmek üzerine. 
 """ 
 # '../input/Sign-language-digits-dataset/X.npy'
 # '../input/Sign-language-digits-dataset/Y.npy'
