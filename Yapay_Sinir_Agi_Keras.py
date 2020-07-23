@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from keras.optimizers import SGD, Adam #OPTİMİZASYON FONKSİYONLARI
 import seaborn as sns #GÖRSELLEŞTİRME KÜTÜPHANESİ
-sns.set_style("darkgrid") #KOYU GİRİ IZGARALI ARKAPLAN
+sns.set_style("darkgrid") #KOYU GRİ IZGARALI ARKAPLAN
 import warnings
 warnings.filterwarnings("ignore") 
 
