@@ -14,7 +14,7 @@ import pandas as pd
 #kodlar
 #veri yukleme
 
-veriler = pd.read_csv('eksikveriler.csv')
+veriler = pd.read_csv('datasets/eksikveriler.csv', na_values="NaN")
 #pd.read_csv("veriler.csv")
 
 print(veriler)
@@ -40,14 +40,14 @@ print(ali.kosmak(90))
 
 #eksik veriler
 #sci - kit learn
-from sklearn.preprocessing import Imputer
+from sklearn.impute import SimpleImputer
 
-imputer= Imputer(missing_values='NaN', strategy = 'mean', axis=0 )    
+imputer= SimpleImputer(strategy = 'mean')    
 
 Yas = veriler.iloc[:,1:4].values
 print(Yas)
-imputer = imputer.fit(Yas[:,1:4])
-Yas[:,1:4] = imputer.transform(Yas[:,1:4])
+Yas[:,1:4] = imputer.fit_transform(Yas[:,1:4])
+
 print(Yas)
 
 ulke = veriler.iloc[:,0:1].values
@@ -57,7 +57,7 @@ le = LabelEncoder()
 ulke[:,0] = le.fit_transform(ulke[:,0])
 print(ulke)
 from sklearn.preprocessing import OneHotEncoder
-ohe = OneHotEncoder(categorical_features='all')
+ohe = OneHotEncoder()
 ulke=ohe.fit_transform(ulke).toarray()
 print(ulke)
 print(list(range(22)))
@@ -82,7 +82,7 @@ print(s2)
 
 
 #veri bölmek için gerekli kütüphane(farklı bölme yöntemleri de var)
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 #ülke, boy, kilo ve yaş bilgilerini kullanrak cinsiyeti bulacaz.
 #dolayısıyla bağımlı ve bağımsız değişkenler var.
 #bu yüzden bulmak istediğimiz kolonla elimizdeki verileri ayrı ayrı ele alacaz.
