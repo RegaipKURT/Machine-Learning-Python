@@ -11,6 +11,19 @@ from keras.activations import relu
 from keras.optimizers import Adam
 from tensorflow.python.keras.engine.training import Model
 
+
+'''
+This file created to show how to use merge layers. (like multiplication layer all of them used with samemethod)
+We will multiply 2 numbers and then we are going to use 2 different models to predict result of the multiplication.
+First model is gonna use Multiply layer and second is going to consist from dense layers.
+Since we have multiplied two numbers we used Multiply layer.
+You can use other merge layers like Add or Subtract to use in your own projects.
+
+We will discover success of two methods will be different.
+Because it is is much more usefull to use Multiply layer when multiply numbers (no surprise).
+
+We also used multiple input layers at the model which contains multiply layer.
+'''
 def create_multiplication_file(filename, start, stop):
     with open(filename, "w") as f:
         f.writelines("first,second,result\n")
@@ -45,8 +58,8 @@ model2 = Sequential([
     Dense(1)
 ])
 
-es1 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=3)
-es2 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=3)
+es1 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=2)
+es2 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=2)
 
 
 epochs = 500
@@ -104,4 +117,4 @@ plt.show()
 results = pd.DataFrame([y_preds[:,0], y_preds2, y_test, X_test.iloc[:,0], X_test.iloc[:,1]]).T
 results.columns = ["Model with Multiplication", "Model without Multiplication", "Actual Result", "First Value", "Second Value"]
 results["Model without Multiplication"] = results["Model without Multiplication"].astype(float)
-print(results.head())
+print(results)
