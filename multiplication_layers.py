@@ -24,6 +24,8 @@ Because it is is much more usefull to use Multiply layer when multiply numbers (
 
 We also used multiple input layers at the model which contains multiply layer.
 '''
+
+#Function to Create Dataset
 def create_multiplication_file(filename, start, stop):
     with open(filename, "w") as f:
         f.writelines("first,second,result\n")
@@ -33,6 +35,8 @@ def create_multiplication_file(filename, start, stop):
 
 
 create_multiplication_file(filename="f.csv", start=10, stop=100)
+
+#Load Dataset
 d = pd.read_csv("f.csv", index_col=None)
 x = d.iloc[:,:2]
 y = d.iloc[:,2]
@@ -43,6 +47,7 @@ xt1 = X_train["first"]
 xt2 = X_train["second"]
 
 
+#model 1 with multiplication layer
 inp1 = Input((1,))
 inp2 = Input((1,))
 m = Multiply()([inp1, inp2])
@@ -52,29 +57,35 @@ out = Dense(1)(d2)
 model = Model([inp1, inp2], out)
 
 
+#model 2 without multiplication layer. Only Dense Layers.
 model2 = Sequential([
     Dense(32, activation="relu"),
     Dense(32, activation="relu"),
     Dense(1)
 ])
 
-es1 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=2)
-es2 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=2)
+#early stopping
+es1 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=1)
+es2 = EarlyStopping(monitor='val_rmse', mode='min', verbose=1, patience=1)
 
 
 epochs = 500
 
+#compile models
 model.compile(optimizer=Adam(), loss="mse", metrics=[rmse(name="rmse")])
 history = model.fit(x=[xt1, xt2], y=y_train, epochs=epochs, validation_data=([X_test["first"],X_test["second"]], y_test), callbacks=[es1])
 
 model2.compile(optimizer=Adam(), loss="mse", metrics=[rmse(name="rmse")])
 history2 = model2.fit(x=X_train, y=y_train, epochs=epochs, validation_data=(X_test, y_test), callbacks=[es2])
 
+#predictions
 y_preds = model.predict([X_test["first"],X_test["second"]])
 y_preds2 = model2.predict(X_test)
 
 
+#PLOT RESULTS
 sns.set_style("darkgrid")
+
 #MODEL1 RESULTS
 plt.subplot(221)
 sns.lineplot(range(0, es1.stopped_epoch+1) if es1.stopped_epoch != 0 else range(0, epochs), 
@@ -114,7 +125,10 @@ plt.legend()
 plt.suptitle(f"RESULTS\nRMSE when Multiplication layer used: {history.history['val_rmse'][-1]}\nRMSE when Multiplication layer not used: {history2.history['val_rmse'][-1]}")
 plt.show()
 
+#RESULTS TO DATAFRAME
 results = pd.DataFrame([y_preds[:,0], y_preds2, y_test, X_test.iloc[:,0], X_test.iloc[:,1]]).T
 results.columns = ["Model with Multiplication", "Model without Multiplication", "Actual Result", "First Value", "Second Value"]
 results["Model without Multiplication"] = results["Model without Multiplication"].astype(float)
 print(results)
+print("Model with Multiplication RMSE: ", model.evaluate(x=[X_test["first"],X_test["second"]], y=y_test)[1])
+print("Model without Multiplication RMSE: ", model2.evaluate(x=X_test, y=y_test)[1])
