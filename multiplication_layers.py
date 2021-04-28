@@ -13,7 +13,7 @@ from tensorflow.python.keras.engine.training import Model
 
 
 '''
-This file created to show how to use merge layers. (like multiplication layer all of them used with samemethod)
+This file created to show how to use merge layers. (like multiplication layer all of them are used with same method)
 We will multiply 2 numbers and then we are going to use 2 different models to predict result of the multiplication.
 First model is gonna use Multiply layer and second is going to consist from dense layers.
 Since we have multiplied two numbers we used Multiply layer.
@@ -23,6 +23,8 @@ We will discover success of two methods will be different.
 Because it is is much more usefull to use Multiply layer when multiply numbers (no surprise).
 
 We also used multiple input layers at the model which contains multiply layer.
+
+When multiplication layer is used train time also be reduced.
 '''
 
 #Function to Create Dataset
