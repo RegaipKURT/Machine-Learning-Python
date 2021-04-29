@@ -10,6 +10,7 @@ from keras.metrics import RootMeanSquaredError as rmse
 from keras.activations import relu
 from keras.optimizers import Adam
 from tensorflow.python.keras.engine.training import Model
+from keras.utils import plot_model
 
 
 '''
@@ -86,9 +87,12 @@ y_preds2 = model2.predict(X_test)
 
 
 #PLOT RESULTS
+
+#styles
 sns.set_style("darkgrid")
 
 #MODEL1 RESULTS
+plt.figure(figsize=(16,12))
 plt.subplot(221)
 sns.lineplot(range(0, es1.stopped_epoch+1) if es1.stopped_epoch != 0 else range(0, epochs), 
              history.history["rmse"],
@@ -125,6 +129,8 @@ plt.legend()
 
 #SHOW PLOT
 plt.suptitle(f"RESULTS\nRMSE when Multiplication layer used: {history.history['val_rmse'][-1]}\nRMSE when Multiplication layer not used: {history2.history['val_rmse'][-1]}")
+plt.savefig("results.png", dpi=100)
+
 plt.show()
 
 #RESULTS TO DATAFRAME
@@ -134,3 +140,19 @@ results["Model without Multiplication"] = results["Model without Multiplication"
 print(results)
 print("Model with Multiplication RMSE: ", model.evaluate(x=[X_test["first"],X_test["second"]], y=y_test)[1])
 print("Model without Multiplication RMSE: ", model2.evaluate(x=X_test, y=y_test)[1])
+
+plot_model(model, to_file="model1.png")
+plot_model(model2, to_file="model2.png")
+
+data1 = plt.imread("model1.png")
+data2 = plt.imread("model2.png")
+
+plt.figure(figsize=(16,12))
+plt.subplot(121)
+plt.imshow(data1)
+plt.title("Model with Multiply Layer")
+plt.subplot(122)
+plt.imshow(data2)
+plt.title("Model with Dense Layers Only")
+plt.savefig("models_graph.png", dpi=100)
+plt.show()
