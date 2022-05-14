@@ -17,14 +17,3 @@ print (kilo)
 boy = veriler[["boy"]] #niye iki parantez??? Çünkü tek parantezde yazınca 
 print (boy)            #verinin üstüne boy diye yazmıyor.Yoksa tek de olabilir.
 
-class insan:
-    def __init__(self, boy, kilo, hız):
-        self.boy = boy
-        self.kilo = kilo
-        self.hız = hız
-    def kos(self):
-        self.hız = self.hız + 10
-
-ali = insan(180, 80, 10)
-ali.kos()
-print ("alinin hızı:{}".format(ali.hız))
